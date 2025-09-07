@@ -1,0 +1,9 @@
+
+[Bb]uild/
+[Bb]inaries/
+[Ii]ntermediate/
+[Ss]aved/
+[Ww]indows/
+.vs/
+.idea/
+*.sln
