@@ -4,6 +4,7 @@
 [Ii]ntermediate/
 [Ss]aved/
 [Ww]indows/
+DerivedDataCache/
 .vs/
 .idea/
 *.sln
