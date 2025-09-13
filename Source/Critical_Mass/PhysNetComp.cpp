@@ -87,6 +87,7 @@ void UPhysNetComp::InitializeNetworkPhysicsMovement()
 	}
 }
 
+// I guess we override this in children for other vehicles etc
 void UPhysNetComp::SimulatePhysicsTick(double DeltaTime, Chaos::FRigidBodyHandle_Internal* RigidBodyHandle)
 {
 	if (!RigidBodyHandle) return;
@@ -98,24 +99,8 @@ void UPhysNetComp::SimulatePhysicsTick(double DeltaTime, Chaos::FRigidBodyHandle
 	SimulationInputs.resetInputs();
 }
 
-class USkeletalMeshComponent* UPhysNetComp::GetSkeletalmeshComponent() const
-{
-	return Cast<USkeletalMeshComponent>(GetPawnOwner()->GetRootComponent());
-}
-
-class UStaticMeshComponent* UPhysNetComp::GetStaticMeshComponent() const
-{
-	return Cast<UStaticMeshComponent>(GetPawnOwner()->GetRootComponent());
-}
-
-class UMeshComponent* UPhysNetComp::GetMeshComponent() const
-{
-	return Cast<UMeshComponent>(GetPawnOwner()->GetRootComponent());
-}
-
 void UPhysNetComp::SetUpdatedComponent(USceneComponent* NewUpdatedComponent)
 {
-	// Super::SetUpdatedComponent(NewUpdatedComponent);
 	UNavMovementComponent::SetUpdatedComponent(NewUpdatedComponent);
 	PawnOwner = NewUpdatedComponent ? Cast<APawn>(NewUpdatedComponent->GetOwner()) : nullptr;
 }

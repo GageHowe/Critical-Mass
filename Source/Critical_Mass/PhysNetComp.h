@@ -1,5 +1,8 @@
 ﻿#pragma once
 
+// this was implemented with the help of
+// https://www.youtube.com/watch?v=6YffN09Rr_M
+
 #include "CoreMinimal.h"
 #include "NetworkPhysicsObjectStructs.h"
 #include "GameFramework/PawnMovementComponent.h"
@@ -23,9 +26,18 @@ public:
 	virtual void SimulatePhysicsTick(double DeltaTime, Chaos::FRigidBodyHandle_Internal* RigidBodyHandle);
 
 	// idk why we need these
-	class USkeletalMeshComponent* GetSkeletalmeshComponent() const;
-	class UStaticMeshComponent* GetStaticMeshComponent() const;
-	class UMeshComponent* GetMeshComponent() const;
+	class USkeletalMeshComponent* GetSkeletalmeshComponent() const
+	{
+		return Cast<USkeletalMeshComponent>(GetPawnOwner()->GetRootComponent()); 
+	};
+	class UStaticMeshComponent* GetStaticMeshComponent() const
+	{
+		return Cast<UStaticMeshComponent>(GetPawnOwner()->GetRootComponent());
+	}
+	class UMeshComponent* GetMeshComponent() const
+	{
+		return Cast<UMeshComponent>(GetPawnOwner()->GetRootComponent());
+	}
 
 	virtual void SetUpdatedComponent(USceneComponent* NewUpdatedComponent) override;
 	virtual void AsyncPhysicsTickComponent(float DeltaTime, float SimTime) override;
