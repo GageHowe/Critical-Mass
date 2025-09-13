@@ -76,6 +76,31 @@ bool UPhysNetComp::ShouldCreatePhysicsState() const
 	return false;
 }
 
+void UPhysNetComp::InitializeNetworkPhysicsMovement()
+{
+	if (bUsingNetworkPhysicsPrediction)
+	{
+		if (NetworkPhysicsComponent)
+		{
+			NetworkPhysicsComponent->CreateDataHistory<FObjectPhysicsMovementTraits>(this);
+		}
+	}
+}
+
+void UPhysNetComp::SimulatePhysicsTick(double DeltaTime, Chaos::FRigidBodyHandle_Internal* RigidBodyHandle)
+{
+	// SimulationState.traveldirection = FRotator ...
+
+	// const FVector DesiredForwardVector = ...
+
+	// AddImpulse
+
+	// AddForce(SimulationInputs.forward * DesiredForwardVector * 800.f)
+	// AddTorqueInRadians(... etc)
+
+	SimulationInputs.resetInputs();
+}
+
 class USkeletalMeshComponent* UPhysNetComp::GetSkeletalmeshComponent() const
 {
 	return Cast<USkeletalMeshComponent>(GetPawnOwner()->GetRootComponent());
@@ -120,5 +145,20 @@ void UPhysNetComp::AsyncPhysicsTickComponent(float DeltaTime, float SimTime)
 FBodyInstance* UPhysNetComp::GetBodyInstance() const
 {
 	return BodyInstance;
+}
+
+void UPhysNetComp::SetForwardInput(float value)
+{
+	SimulationInputs.forward = value;
+}
+
+void UPhysNetComp::SetRightInput(float value)
+{
+	SimulationInputs.right = value;
+}
+
+void UPhysNetComp::SetUpInput(float value)
+{
+	SimulationInputs.up = value;
 }
 
