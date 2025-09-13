@@ -5,13 +5,13 @@
 #include "Physics/NetworkPhysicsComponent.h"
 #include "PhysNetComp.generated.h"
 
-UCLASS()
+UCLASS(ClassGroup=(Movement), meta=(BlueprintSpawnableComponent))
 class CRITICAL_MASS_API UPhysNetComp : public UPawnMovementComponent
 {
 	GENERATED_BODY()
 public:
 
-	UPhysNetComp(const FObjectInitializer& ObjectInitializer);
+	UPhysNetComp(const FObjectInitializer& ObjectInitializer); 
 	virtual void BeginPlay() override;
 	virtual void OnCreatePhysicsState() override;
 	virtual void OnDestroyPhysicsState() override;
