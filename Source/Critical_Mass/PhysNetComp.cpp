@@ -89,15 +89,12 @@ void UPhysNetComp::InitializeNetworkPhysicsMovement()
 
 void UPhysNetComp::SimulatePhysicsTick(double DeltaTime, Chaos::FRigidBodyHandle_Internal* RigidBodyHandle)
 {
-	// SimulationState.traveldirection = FRotator ...
+	if (!RigidBodyHandle) return;
+	
+	const FVector Forward = GetOwner()->GetActorForwardVector();
+	const FVector Force = Forward * SimulationInputs.forward * 500000.f;
 
-	// const FVector DesiredForwardVector = ...
-
-	// AddImpulse
-
-	// AddForce(SimulationInputs.forward * DesiredForwardVector * 800.f)
-	// AddTorqueInRadians(... etc)
-
+	RigidBodyHandle->AddForce(Force);
 	SimulationInputs.resetInputs();
 }
 
