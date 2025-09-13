@@ -8,11 +8,10 @@ public class Critical_Mass : ModuleRules
 	{
 		PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
 	
-		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "EnhancedInput", "Mover", "ChaosMover" }); // already included
+		PublicDependencyModuleNames.AddRange(new string[] { "Core", "Chaos", "CoreUObject", "Engine", "InputCore", "EnhancedInput", "Mover", "ChaosMover", "PhysicsCore" }); // already included
 
 		PrivateDependencyModuleNames.AddRange(new string[] {  });
-
-
+		
 		// Uncomment if you are using Slate UI
 		// PrivateDependencyModuleNames.AddRange(new string[] { "Slate", "SlateCore" });
 		

@@ -7,6 +7,9 @@
 #include "MovementMode.h"
 #include "MoverTypes.h"
 #include "MoverComponent.h"
+#include "NetworkPrediction/Public/NetworkPredictionComponent.h"
+#include "NetworkPredictionPhysics.h"
+#include "NetworkPredictionPhysicsComponent.h"
 #include "MinimalPawn.generated.h"
 
 UCLASS()
@@ -22,8 +25,8 @@ protected:
 
 public:
 	virtual void Tick(float DeltaTime) override;
-	// virtual void AsyncPhysicsTickActor(float DeltaTime, float SimTime) override;
-	// virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
+	virtual void AsyncPhysicsTickActor(float DeltaTime, float SimTime) override;
+	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
 private:
 	// UPROPERTY(VisibleAnywhere)
