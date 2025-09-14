@@ -1,11 +1,13 @@
 ﻿#include "NetworkPhysicsObjectStructs.h"
-#include "PhysNetComp.h"
+
+#include "BasePhysNetComp.h"
+
 
 // FObjectNetPhysMoveStates
 
 void FObjectNetPhysMoveStates::ApplyData(UActorComponent* NetworkComponent) const
 {
-	if (UPhysNetComp* PNC = Cast<UPhysNetComp>(NetworkComponent))
+	if (UBasePhysNetComp* PNC = Cast<UBasePhysNetComp>(NetworkComponent))
 	{
 		PNC->SimulationState = MovementStates;
 	}
@@ -15,7 +17,7 @@ void FObjectNetPhysMoveStates::BuildData(const UActorComponent* NetworkComponent
 {
 	if (NetworkComponent)
 	{
-		if (const UPhysNetComp* PNC = Cast<const UPhysNetComp>(NetworkComponent))
+		if (const UBasePhysNetComp* PNC = Cast<const UBasePhysNetComp>(NetworkComponent))
 		{
 			MovementStates = PNC->SimulationState;
 		}
@@ -45,7 +47,7 @@ void FObjectNetPhysMoveStates::MergeData(const FNetworkPhysicsData& FromData)
 
 void FObjectNetPhysMoveInputs::ApplyData(UActorComponent* NetworkComponent) const
 {
-	if (UPhysNetComp* PNC = Cast<UPhysNetComp>(NetworkComponent))
+	if (UBasePhysNetComp* PNC = Cast<UBasePhysNetComp>(NetworkComponent))
 	{
 		PNC->SimulationInputs = MovementInputs;
 	}
@@ -55,7 +57,7 @@ void FObjectNetPhysMoveInputs::BuildData(const UActorComponent* NetworkComponent
 {
 	if (NetworkComponent)
 	{
-		if (const UPhysNetComp* PNC = Cast<const UPhysNetComp>(NetworkComponent))
+		if (const UBasePhysNetComp* PNC = Cast<const UBasePhysNetComp>(NetworkComponent))
 		{
 			MovementInputs = PNC->SimulationInputs;
 		}

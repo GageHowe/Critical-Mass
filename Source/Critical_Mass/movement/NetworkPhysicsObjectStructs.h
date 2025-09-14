@@ -4,7 +4,7 @@
 #include "PhysicsProxy/SingleParticlePhysicsProxy.h"
 #include "NetworkPhysicsObjectStructs.generated.h"
 
-class UPhysNetComp;
+class UBasePhysNetComp;
 
 // FObjectSimulationInputs
 
@@ -15,17 +15,29 @@ struct FObjectSimulationInputs
 	// FObjectSimulationInputs() : // constructor with args?
 	FObjectSimulationInputs(){};
 	~FObjectSimulationInputs(){};
-	
+
+	// keeping all these is probably ok since Unreal delta compresses
 	UPROPERTY() float forward = 0;
 	UPROPERTY() float right = 0;
 	UPROPERTY() float up = 0;
+	UPROPERTY() float yaw = 0;
+	UPROPERTY() float pitch = 0;
+	UPROPERTY() float roll = 0;
+	UPROPERTY() FVector lookDirection = {0,0,0};
 
-	// this feels like bad practice but it's what the video said
+	// used to locally predict impulses from explosions like rocket jumps
+	UPROPERTY(NotReplicated) FVector LocalImpulse = {0,0,0};
+
 	void resetInputs()
 	{
 		forward = 0;
 		right = 0;
 		up = 0;
+		yaw = 0;
+		pitch = 0;
+		roll = 0;
+		lookDirection = {0,0,0};
+		LocalImpulse = {0,0,0};
 	}
 };
 

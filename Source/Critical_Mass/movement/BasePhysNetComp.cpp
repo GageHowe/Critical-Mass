@@ -1,7 +1,9 @@
-﻿#include "PhysNetComp.h"
+﻿#include "BasePhysNetComp.h"
+// #include "NetworkPhysicsObjectStructs.h"
+#include "NetworkPhysicsObjectStructs.h"
 #include "PhysicsProxy/SingleParticlePhysicsProxy.h"
 
-UPhysNetComp::UPhysNetComp(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer)
+UBasePhysNetComp::UBasePhysNetComp(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer)
 {
 	SetIsReplicatedByDefault(true);
 	bUsingNetworkPhysicsPrediction = Chaos::FPhysicsSolverBase::IsNetworkPhysicsPredictionEnabled();
@@ -16,12 +18,12 @@ UPhysNetComp::UPhysNetComp(const FObjectInitializer& ObjectInitializer) : Super(
 	}
 }
 
-void UPhysNetComp::BeginPlay()
+void UBasePhysNetComp::BeginPlay()
 {
 	Super::BeginPlay();
 }
 
-void UPhysNetComp::OnCreatePhysicsState()
+void UBasePhysNetComp::OnCreatePhysicsState()
 {
 	Super::OnCreatePhysicsState();
 	UWorld* World = GetWorld();
@@ -40,7 +42,7 @@ void UPhysNetComp::OnCreatePhysicsState()
 	}
 }
 
-void UPhysNetComp::OnDestroyPhysicsState()
+void UBasePhysNetComp::OnDestroyPhysicsState()
 {
 	Super::OnDestroyPhysicsState();
 
@@ -55,7 +57,7 @@ void UPhysNetComp::OnDestroyPhysicsState()
 	}
 }
 
-bool UPhysNetComp::ShouldCreatePhysicsState() const
+bool UBasePhysNetComp::ShouldCreatePhysicsState() const
 {
 	// return Super::ShouldCreatePhysicsState();
 
@@ -76,7 +78,7 @@ bool UPhysNetComp::ShouldCreatePhysicsState() const
 	return false;
 }
 
-void UPhysNetComp::InitializeNetworkPhysicsMovement()
+void UBasePhysNetComp::InitializeNetworkPhysicsMovement()
 {
 	if (bUsingNetworkPhysicsPrediction)
 	{
@@ -88,24 +90,26 @@ void UPhysNetComp::InitializeNetworkPhysicsMovement()
 }
 
 // I guess we override this in children for other vehicles etc
-void UPhysNetComp::SimulatePhysicsTick(double DeltaTime, Chaos::FRigidBodyHandle_Internal* RigidBodyHandle)
+void UBasePhysNetComp::SimulatePhysicsTick(double DeltaTime, Chaos::FRigidBodyHandle_Internal* RigidBodyHandle)
 {
 	if (!RigidBodyHandle) return;
-	
-	const FVector Forward = GetOwner()->GetActorForwardVector();
-	const FVector Force = Forward * SimulationInputs.forward * 500000.f;
 
-	RigidBodyHandle->AddForce(Force);
+	// if client and has unexpected force, apply it
+	if (!GetOwner()->HasAuthority() && !SimulationInputs.LocalImpulse.IsNearlyZero())
+	{
+		RigidBodyHandle->AddForce(SimulationInputs.LocalImpulse);
+	}
+	
 	SimulationInputs.resetInputs();
 }
 
-void UPhysNetComp::SetUpdatedComponent(USceneComponent* NewUpdatedComponent)
+void UBasePhysNetComp::SetUpdatedComponent(USceneComponent* NewUpdatedComponent)
 {
 	UNavMovementComponent::SetUpdatedComponent(NewUpdatedComponent);
 	PawnOwner = NewUpdatedComponent ? Cast<APawn>(NewUpdatedComponent->GetOwner()) : nullptr;
 }
 
-void UPhysNetComp::AsyncPhysicsTickComponent(float DeltaTime, float SimTime)
+void UBasePhysNetComp::AsyncPhysicsTickComponent(float DeltaTime, float SimTime)
 {
 	Super::AsyncPhysicsTickComponent(DeltaTime, SimTime);
 
@@ -120,26 +124,25 @@ void UPhysNetComp::AsyncPhysicsTickComponent(float DeltaTime, float SimTime)
 	if (World && RigidHandle)
 	{
 		SimulatePhysicsTick(DeltaTime, RigidHandle);
-		// deferredforcesloader.Apply(RigidHandle) // not using this probably
 	}
 }
 
-FBodyInstance* UPhysNetComp::GetBodyInstance() const
+FBodyInstance* UBasePhysNetComp::GetBodyInstance() const
 {
 	return BodyInstance;
 }
 
-void UPhysNetComp::SetForwardInput(float value)
+void UBasePhysNetComp::SetForwardInput(float value)
 {
 	SimulationInputs.forward = value;
 }
 
-void UPhysNetComp::SetRightInput(float value)
+void UBasePhysNetComp::SetRightInput(float value)
 {
 	SimulationInputs.right = value;
 }
 
-void UPhysNetComp::SetUpInput(float value)
+void UBasePhysNetComp::SetUpInput(float value)
 {
 	SimulationInputs.up = value;
 }
