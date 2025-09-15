@@ -16,10 +16,43 @@ public:
 	{
 		if (!RigidBodyHandle) return;
 		
-		const FVector Forward = GetOwner()->GetActorForwardVector();
-		const FVector Force = Forward * SimulationInputs.forward * 500000.f;
+		FVector Force = FVector::ZeroVector;
 
+		if (SimulationInputs.forward != 0)
+		{
+			FVector Forward = GetOwner()->GetActorForwardVector();
+			Force += Forward * SimulationInputs.forward * 500000.f;
+		}
+
+		if (SimulationInputs.up != 0)
+		{
+			FVector Up = GetOwner()->GetActorUpVector();
+			Force += Up * SimulationInputs.up * 500000.f;
+		}
+
+		if (SimulationInputs.right != 0)
+		{
+			FVector Right = GetOwner()->GetActorRightVector();
+			Force += Right * SimulationInputs.right * 500000.f;
+		}
+		
+		FVector Torque = FVector::ZeroVector;
+		
+		if (SimulationInputs.yaw != 0.f)
+		{
+			Torque += GetOwner()->GetActorUpVector() * SimulationInputs.yaw * 200000.f;
+		}
+		if (SimulationInputs.pitch != 0.f)
+		{
+			Torque += GetOwner()->GetActorRightVector() * SimulationInputs.pitch * 200000.f;
+		}
+		if (SimulationInputs.roll != 0.f)
+		{
+			Torque += GetOwner()->GetActorForwardVector() * SimulationInputs.roll * 200000.f;
+		}
+		
 		RigidBodyHandle->AddForce(Force);
+		RigidBodyHandle->AddTorque(Torque);
 
 		Super::SimulatePhysicsTick(DeltaTime, RigidBodyHandle);
 	}

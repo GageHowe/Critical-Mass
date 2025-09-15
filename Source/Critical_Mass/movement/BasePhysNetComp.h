@@ -53,6 +53,12 @@ public:
 	void SetRightInput(float value);
 	UFUNCTION(BlueprintCallable)
 	void SetUpInput(float value);
+	UFUNCTION(BlueprintCallable)
+	void SetPitchInput(float value);
+	UFUNCTION(BlueprintCallable)
+	void SetYawInput(float value);
+	UFUNCTION(BlueprintCallable)
+	void SetRollInput(float value);
 
 private:
 	UPROPERTY()

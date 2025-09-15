@@ -26,7 +26,7 @@ void FObjectNetPhysMoveStates::BuildData(const UActorComponent* NetworkComponent
 
 void FObjectNetPhysMoveStates::DecayData(float DecayAmount)
 {
-	DecayAmount = FMath::Min(DecayAmount * 2, 1.0f); // never used?
+	// DecayAmount = FMath::Min(DecayAmount * 2, 1.0f); // never used in the tutorial, not going to worry about it for now
 }
 
 bool FObjectNetPhysMoveStates::NetSerialize(FArchive& Ar, class UPackageMap* Map, bool& bOutSuccess)
@@ -67,7 +67,13 @@ void FObjectNetPhysMoveInputs::BuildData(const UActorComponent* NetworkComponent
 void FObjectNetPhysMoveInputs::DecayData(float DecayAmount)
 {
 	DecayAmount = FMath::Min(DecayAmount * 2, 1.0f);
-	// MovementInputs.forward = FMath::Lerp(MovementInputs, 0.0, DecayAmount);
+	MovementInputs.forward = FMath::Lerp(MovementInputs.forward, 0.0, DecayAmount);
+	MovementInputs.right = FMath::Lerp(MovementInputs.right, 0.0, DecayAmount);
+	MovementInputs.up = FMath::Lerp(MovementInputs.up, 0.0, DecayAmount);
+	MovementInputs.pitch = FMath::Lerp(MovementInputs.pitch, 0.0, DecayAmount);
+	MovementInputs.yaw = FMath::Lerp(MovementInputs.yaw, 0.0, DecayAmount);
+	MovementInputs.roll = FMath::Lerp(MovementInputs.roll, 0.0, DecayAmount);
+	
 	// finish this later if it's even needed
 }
 
@@ -77,6 +83,11 @@ bool FObjectNetPhysMoveInputs::NetSerialize(FArchive& Ar, class UPackageMap* Map
 	Ar << MovementInputs.forward;
 	Ar << MovementInputs.right;
 	Ar << MovementInputs.up;
+	Ar << MovementInputs.pitch;
+	Ar << MovementInputs.yaw;
+	Ar << MovementInputs.roll;
+	Ar << MovementInputs.lookDirection;
+	// Ar << MovementInputs.LocalImpulse; // for local use only
 	return true;
 }
 
@@ -91,6 +102,9 @@ void FObjectNetPhysMoveInputs::InterpolateData(const FNetworkPhysicsData& MinDat
 	MovementInputs.forward = FMath::Lerp(MinInput.MovementInputs.forward, MaxInput.MovementInputs.forward, LerpFactor);
 	MovementInputs.right = FMath::Lerp(MinInput.MovementInputs.right, MaxInput.MovementInputs.right, LerpFactor);
 	MovementInputs.up = FMath::Lerp(MinInput.MovementInputs.up, MaxInput.MovementInputs.up, LerpFactor);
+	MovementInputs.pitch = FMath::Lerp(MinInput.MovementInputs.pitch, MaxInput.MovementInputs.pitch, LerpFactor);
+	MovementInputs.yaw = FMath::Lerp(MinInput.MovementInputs.yaw, MaxInput.MovementInputs.yaw, LerpFactor);
+	MovementInputs.roll = FMath::Lerp(MinInput.MovementInputs.roll, MaxInput.MovementInputs.roll, LerpFactor);
 }
 
 void FObjectNetPhysMoveInputs::MergeData(const FNetworkPhysicsData& FromData)

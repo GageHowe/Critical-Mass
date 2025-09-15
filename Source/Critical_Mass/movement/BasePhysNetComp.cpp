@@ -94,11 +94,11 @@ void UBasePhysNetComp::SimulatePhysicsTick(double DeltaTime, Chaos::FRigidBodyHa
 {
 	if (!RigidBodyHandle) return;
 
-	// if client and has unexpected force, apply it
-	if (!GetOwner()->HasAuthority() && !SimulationInputs.LocalImpulse.IsNearlyZero())
-	{
-		RigidBodyHandle->AddForce(SimulationInputs.LocalImpulse);
-	}
+	// // if client and has unexpected force, apply it
+	// if (!GetOwner()->HasAuthority() && !SimulationInputs.LocalImpulse.IsNearlyZero())
+	// {
+	// 	RigidBodyHandle->AddForce(SimulationInputs.LocalImpulse);
+	// }
 	
 	SimulationInputs.resetInputs();
 }
@@ -145,5 +145,20 @@ void UBasePhysNetComp::SetRightInput(float value)
 void UBasePhysNetComp::SetUpInput(float value)
 {
 	SimulationInputs.up = value;
+}
+
+void UBasePhysNetComp::SetPitchInput(float value)
+{
+	SimulationInputs.pitch = value;
+}
+
+void UBasePhysNetComp::SetYawInput(float value)
+{
+	SimulationInputs.yaw = value;
+}
+
+void UBasePhysNetComp::SetRollInput(float value)
+{
+	SimulationInputs.roll = value;
 }
 
