@@ -1,0 +1,38 @@
+{
+	"version": 1,
+	"changelists": [
+		{
+			"guid": "00000000000000000000000000000000",
+			"description": "Default Uncontrolled Changelist",
+			"files": [
+				"C:/Users/howeg/OneDrive/Documents/Unreal Projects/Critical_Mass/Content/blueprints/BP_MinimalPawn.uasset",
+				"C:/Users/howeg/OneDrive/Documents/Unreal Projects/Critical_Mass/Content/blueprints/resimbox.uasset",
+				"C:/Users/howeg/OneDrive/Documents/Unreal Projects/Critical_Mass/Content/__ExternalActors__/testingMap/A/RJ/CJHO4TRKUVMF1HH0DUBI7W.uasset",
+				"C:/Users/howeg/OneDrive/Documents/Unreal Projects/Critical_Mass/Content/input/IA_AxisForward.uasset",
+				"C:/Users/howeg/OneDrive/Documents/Unreal Projects/Critical_Mass/Content/input/IA_AxisRight.uasset",
+				"C:/Users/howeg/OneDrive/Documents/Unreal Projects/Critical_Mass/Content/input/IM_InputContext_CM.uasset",
+				"C:/Users/howeg/OneDrive/Documents/Unreal Projects/Critical_Mass/Content/blueprints/BP_MyNewPawn.uasset",
+				"C:/Users/howeg/OneDrive/Documents/Unreal Projects/Critical_Mass/Content/__ExternalActors__/testingMap/7/EM/Q59FW9PMFSL07NXOLE8WA3.uasset",
+				"C:/Users/howeg/OneDrive/Documents/Unreal Projects/Critical_Mass/Content/BP_CMGameMode.uasset",
+				"C:/Users/howeg/OneDrive/Documents/Unreal Projects/Critical_Mass/Content/BP_CMPlayerController.uasset",
+				"C:/Users/howeg/OneDrive/Documents/Unreal Projects/Critical_Mass/Content/__ExternalActors__/testingMap/C/N6/16XRUFNVTGISU19UYP9KAL.uasset",
+				"C:/Users/howeg/OneDrive/Documents/Unreal Projects/Critical_Mass/Content/input/IA_AxisUp.uasset",
+				"C:/Users/howeg/OneDrive/Documents/Unreal Projects/Critical_Mass/Content/__ExternalActors__/testingMap/9/AW/UZVPSTPXAYNGQQ360ZIYIY.uasset",
+				"C:/Users/howeg/OneDrive/Documents/Unreal Projects/Critical_Mass/Content/__ExternalActors__/testingMap/6/0G/ZNBSCJH1801RAN60CSSOD5.uasset",
+				"C:/Users/howeg/OneDrive/Documents/Unreal Projects/Critical_Mass/Content/__ExternalActors__/testingMap/3/MH/XQU1IXSWVUKK9XRV2S72ND.uasset",
+				"C:/Users/howeg/OneDrive/Documents/Unreal Projects/Critical_Mass/Content/__ExternalActors__/testingMap/1/3J/KJPK952SX0051OZDJD9FR5.uasset",
+				"C:/Users/howeg/OneDrive/Documents/Unreal Projects/Critical_Mass/Content/input/IA_Jump.uasset",
+				"C:/Users/howeg/OneDrive/Documents/Unreal Projects/Critical_Mass/Content/input/IA_Jump_CM.uasset",
+				"C:/Users/howeg/OneDrive/Documents/Unreal Projects/Critical_Mass/Content/input/IA_Pitch.uasset",
+				"C:/Users/howeg/OneDrive/Documents/Unreal Projects/Critical_Mass/Content/input/IA_Yaw.uasset",
+				"C:/Users/howeg/OneDrive/Documents/Unreal Projects/Critical_Mass/Content/input/IA_Roll.uasset",
+				"C:/Users/howeg/OneDrive/Documents/Unreal Projects/Critical_Mass/Content/__ExternalActors__/testingMap/4/07/4QUL0PV160849D8KMI7AMJ.uasset",
+				"C:/Users/howeg/OneDrive/Documents/Unreal Projects/Critical_Mass/Content/GameModeThing.uasset",
+				"C:/Users/howeg/OneDrive/Documents/Unreal Projects/Critical_Mass/Content/__ExternalActors__/testingMap/1/OC/JRF3OC8WIYT91JKA97R9AT.uasset",
+				"C:/Users/howeg/OneDrive/Documents/Unreal Projects/Critical_Mass/Content/__ExternalActors__/testingMap/7/9U/OYI81VYPAINOR6HC08EVER.uasset",
+				"C:/Users/howeg/OneDrive/Documents/Unreal Projects/Critical_Mass/Content/blueprints/GageChaosMannyPawn.uasset",
+				"C:/Users/howeg/OneDrive/Documents/Unreal Projects/Critical_Mass/Content/blueprints/NotMoverPawn.uasset"
+			]
+		}
+	]
+}
